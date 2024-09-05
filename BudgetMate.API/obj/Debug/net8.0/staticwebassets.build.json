@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "MiWw9cdpITtqZElrPKy9mDKeNxnurTTMa3gJhlTt47s=",
+  "Source": "BudgetMate.API",
+  "BasePath": "_content/BudgetMate.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

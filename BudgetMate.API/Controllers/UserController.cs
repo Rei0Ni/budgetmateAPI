@@ -1,4 +1,6 @@
+using BudgetMate.Application.DTO.User;
 using BudgetMate.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +26,8 @@ namespace BudgetMate.API.Controllers
         }
 
         [HttpPost]
-        [Route("CreateUser")]
-        public async Task<IActionResult> CreateUser(NewUserDTO user)
+        [Route("Register")]
+        public async Task<IActionResult> CreateUser(NewUserDto user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -38,16 +40,19 @@ namespace BudgetMate.API.Controllers
 
             IdentityResult result = await userManager.CreateAsync(appUser, user.Password!);
             if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(appUser, "App_User");
                 return Ok(new { Result = "User created successfully" });
+            }
             return BadRequest(result.Errors);
         }
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login(LoginDTO user)
+        public async Task<IActionResult> Login(LoginDto user)
         {
             if (!ModelState.IsValid)
-                return Unauthorized(new {Result = "Invalid Username or Password"});
+                return Unauthorized(new { Result = "Invalid Username or Password" });
             ApplicationUser? appUser = await userManager.FindByNameAsync(user.Username!);
 
 
@@ -55,11 +60,22 @@ namespace BudgetMate.API.Controllers
             {
                 var result = await signInManager.PasswordSignInAsync(appUser.UserName!,
                            user.Password!, false, false);
-                
-                return Ok(new {Result = "Login Successful"});
+
+                return Ok(new { Result = "Login Successful" });
             }
 
-            return Unauthorized(new {Result = "Invalid Username or Password"});
+            return Unauthorized(new { Result = "Invalid Username or Password" });
+        }
+
+        [HttpGet]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            if (signInManager.IsSignedIn(HttpContext.User))
+            {
+                signInManager.SignOutAsync();
+            }
+            return Ok();
         }
     }
 }
