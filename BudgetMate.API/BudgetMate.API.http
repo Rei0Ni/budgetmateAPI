@@ -1,0 +1,6 @@
+@BudgetMate.API_HostAddress = http://localhost:5001
+
+GET {{BudgetMate.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
