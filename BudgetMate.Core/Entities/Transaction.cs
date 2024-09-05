@@ -12,7 +12,7 @@ public class Transaction
     public DateTime Date { get; set; }
 
     public Guid UserId { get; set; }
-    public ApplicationUser User { get; set; }
+    public required ApplicationUser User { get; set; }
 }
 
 public enum TransactionType
