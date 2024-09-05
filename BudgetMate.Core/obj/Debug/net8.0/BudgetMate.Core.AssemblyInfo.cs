@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BudgetMate.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9463ae0cf81a16afd76e59355e4b791d913a3c11")]
 [assembly: System.Reflection.AssemblyProductAttribute("BudgetMate.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BudgetMate.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
