@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BudgetMate.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6fd69cff76b513b86c94eb01cb365f46bee86e20")]
 [assembly: System.Reflection.AssemblyProductAttribute("BudgetMate.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BudgetMate.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

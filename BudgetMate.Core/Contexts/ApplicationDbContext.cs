@@ -18,4 +18,7 @@ public class ApplicationDBContext
             _database.GetCollection<ApplicationUser>("Users");
     public IMongoCollection<ApplicationRole> Roles => 
             _database.GetCollection<ApplicationRole>("Roles");
+
+    public IMongoCollection<Transaction> Transactions =>
+            _database.GetCollection<Transaction>("Transactions");
 }

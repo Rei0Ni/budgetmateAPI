@@ -4,6 +4,12 @@ using MongoDbGenericRepository.Attributes;
 
 namespace BudgetMate.Core.Entities;
 
+public enum Role
+{
+    Administrator = 0,
+    App_User = 1
+}
+
 [CollectionName("Users")]
 public class ApplicationUser : MongoIdentityUser<Guid>
 {
