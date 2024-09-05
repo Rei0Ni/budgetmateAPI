@@ -5,12 +5,14 @@ namespace BudgetMate.Core.Entities;
 public class Transaction
 {
     public Guid Id { get; set; }
-    public Guid UserId { get; set; }
     public TransactionType Type { get; set; }
     public decimal amount { get; set; }
     public TransactionCategory Category { get; set; }
     public string Description { get; set; } = "";
     public DateTime Date { get; set; }
+
+    public Guid UserId { get; set; }
+    public ApplicationUser User { get; set; }
 }
 
 public enum TransactionType
