@@ -1,6 +1,7 @@
 using System;
 using BudgetMate.Application.DTO.Transaction;
 using BudgetMate.Application.Interfaces.Transaction;
+using BudgetMate.Application.Interfaces.Wallet;
 using BudgetMate.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -9,11 +10,15 @@ namespace BudgetMate.Application.Services;
 public class TransactionService : ITransactionService
 {
     private readonly ITransactionRepository _repository;
+    private readonly IWalletRepository _walletRepository;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public TransactionService(ITransactionRepository repository, UserManager<ApplicationUser> userManager)
+    public TransactionService(ITransactionRepository repository, 
+                              IWalletRepository walletRepository,
+                              UserManager<ApplicationUser> userManager)
     {
         _repository = repository;
+        _walletRepository = walletRepository;
         _userManager = userManager;
     }
     public async Task<TransactionDto?> AddTransactionAsync(NewTransactionDto dto, string userId)
@@ -30,7 +35,9 @@ public class TransactionService : ITransactionService
                 Description = dto.Description,
                 Date = dto.Date
             };
-            return _repository.AddTransaction(transaction);
+            var newTransaction = _repository.AddTransaction(transaction);
+            _walletRepository.ModifyWallet(userId, newTransaction);
+            return newTransaction;
         }
         return null;
     }

@@ -12,9 +12,9 @@ namespace BudgetMate.Infrastructure;
 public class TransactionRepository : ITransactionRepository
 {
     private readonly ApplicationDBContext _context;
-    private readonly Mapper _mapper;
+    private readonly IMapper _mapper;
 
-    public TransactionRepository(ApplicationDBContext context, Mapper mapper)
+    public TransactionRepository(ApplicationDBContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

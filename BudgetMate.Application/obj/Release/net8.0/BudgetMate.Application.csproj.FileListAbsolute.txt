@@ -1,0 +1,12 @@
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/bin/Release/net8.0/BudgetMate.Application.deps.json
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/bin/Release/net8.0/BudgetMate.Application.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/bin/Release/net8.0/BudgetMate.Core.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.csproj.AssemblyReference.cache
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.AssemblyInfoInputs.cache
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.AssemblyInfo.cs
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.csproj.CoreCompileInputs.cache
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.csproj.CopyComplete
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/BudgetMate.Application.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/refint/BudgetMate.Application.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Release/net8.0/ref/BudgetMate.Application.dll

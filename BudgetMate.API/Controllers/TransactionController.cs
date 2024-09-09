@@ -39,7 +39,7 @@ namespace BudgetMate.API.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<ActionResult<List<TransactionDto>>> AddNew(NewTransactionDto dto)
+        public async Task<ActionResult<TransactionDto>> AddNew(NewTransactionDto dto)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var transactions = await _transactionService.AddTransactionAsync(dto, userId);

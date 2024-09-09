@@ -1,4 +1,5 @@
 using BudgetMate.Application.DTO.User;
+using BudgetMate.Application.Interfaces.Wallet;
 using BudgetMate.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,14 +16,18 @@ namespace BudgetMate.API.Controllers
         private SignInManager<ApplicationUser> signInManager;
 
         private readonly IConfiguration _configuration;
+        private readonly IWalletRepository _walletRepository;
+
         public UserController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IWalletRepository walletRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _configuration = configuration;
+            _walletRepository = walletRepository;
         }
 
         [HttpPost]
@@ -42,6 +47,7 @@ namespace BudgetMate.API.Controllers
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(appUser, "App_User");
+                _walletRepository.AddWallet(appUser.Id.ToString());
                 return Ok(new { Result = "User created successfully" });
             }
             return BadRequest(result.Errors);

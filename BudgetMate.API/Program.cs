@@ -1,7 +1,13 @@
+using AutoMapper;
 using BudgetMate.API.Models;
 using BudgetMate.Application.Configuration;
+using BudgetMate.Application.Interfaces.Transaction;
+using BudgetMate.Application.Interfaces.Wallet;
+using BudgetMate.Application.Services;
 using BudgetMate.Core.Contexts;
 using BudgetMate.Core.Entities;
+using BudgetMate.Infrastructure;
+using BudgetMate.Infrastructure.Wallet;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
@@ -55,10 +61,10 @@ builder.Services.AddAuthentication(options =>
     options.Cookie.Name = "SessionCookie";
 });
 
-// builder.Services.ConfigureApplicationCookie(options =>
-// {
-//     options.Cookie.Name = "SessionCookie";
-// });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "SessionCookie";
+});
 
 // AddIdentity :-  Registers the services  
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
@@ -87,6 +93,10 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
 
 builder.Services.AddApplicationCore();
 
+// var mapperConfiguration = builder.Services.BuildServiceProvider()
+//                         .GetService<IMapper>().ConfigurationProvider;
+// mapperConfiguration.AssertConfigurationIsValid();
+
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -94,6 +104,11 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IWalletService, WalletService>();
+builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 
 var app = builder.Build();
 

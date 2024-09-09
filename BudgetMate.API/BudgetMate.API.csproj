@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BudgetMate.Application\BudgetMate.Application.csproj" />
+    <ProjectReference Include="..\BudgetMate.Infrastructure\BudgetMate.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
