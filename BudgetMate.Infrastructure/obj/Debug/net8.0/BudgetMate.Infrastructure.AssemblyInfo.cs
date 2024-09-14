@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BudgetMate.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a9cc576314b67f248d0e01c368edbdffcf43bfc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59c0ab9875fbd212b47bb6abc788aad9efe366f1")]
 [assembly: System.Reflection.AssemblyProductAttribute("BudgetMate.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BudgetMate.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

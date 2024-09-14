@@ -13,3 +13,4 @@
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Debug/net8.0/refint/BudgetMate.Application.dll
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Debug/net8.0/BudgetMate.Application.pdb
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Debug/net8.0/ref/BudgetMate.Application.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Application/obj/Debug/net8.0/BudgetMate.Application.sourcelink.json

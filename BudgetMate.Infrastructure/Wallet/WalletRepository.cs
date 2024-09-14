@@ -19,37 +19,45 @@ public class WalletRepository : IWalletRepository
     public void AddWallet(string UserId)
     {
         var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();
-        if (User == null){
+        if (User == null)
+        {
 
         }
-        _context.Wallets.InsertOne(new Core.Entities.Wallet(){User = User!, UserId = User!.Id});
+        _context.Wallets.InsertOne(new Core.Entities.Wallet() { User = User!, UserId = User!.Id });
     }
 
     public Core.Entities.Wallet GetWallet(string UserId)
     {
         var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();
-        if (User == null){
+        if (User == null)
+        {
 
         }
         var wallet = _context.Wallets.Find(x => x.UserId == User!.Id).FirstOrDefault();
         return wallet;
     }
 
-    public void ModifyWallet(string UserId, TransactionDto transaction)
+    public void ModifyWallet(string UserId, TransactionDto? transaction)
     {
         var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();
-        if (User == null){
+        if (User == null)
+        {
 
         }
         var wallet = _context.Wallets.Find(x => x.UserId == User!.Id).FirstOrDefault();
         var filter = Builders<Core.Entities.Wallet>.Filter.Eq(wallet => wallet.UserId, User!.Id);
-        if (transaction.Type == TransactionType.INCOME){
-            var update = Builders<Core.Entities.Wallet>.Update.Set(wallet => wallet.Balance, wallet.Balance + transaction.Amount);
+        if (transaction!.Type == TransactionType.INCOME)
+        {
+            var update = Builders<Core.Entities.Wallet>.Update
+                    .Set(wallet => wallet.Balance, wallet.Balance + transaction.Amount)
+                    .Set(wallet => wallet.Income, wallet.Income + transaction.Amount);
             _context.Wallets.UpdateOneAsync(filter, update);
         }
-        else if (transaction.Type == TransactionType.EXPENSE)
+        else if (transaction!.Type == TransactionType.EXPENSE)
         {
-            var update = Builders<Core.Entities.Wallet>.Update.Set(wallet => wallet.Balance, wallet.Balance - transaction.Amount);
+            var update = Builders<Core.Entities.Wallet>.Update
+                    .Set(wallet => wallet.Balance, wallet.Balance - transaction.Amount)
+                    .Set(wallet => wallet.Expense, wallet.Expense + transaction.Amount);
             _context.Wallets.UpdateOneAsync(filter, update);
         }
     }
@@ -57,7 +65,8 @@ public class WalletRepository : IWalletRepository
     public void RemoveWallet(string UserId)
     {
         var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();
-        if (User == null){
+        if (User == null)
+        {
 
         }
         _context.Wallets.DeleteOne(x => x.UserId == User!.Id);

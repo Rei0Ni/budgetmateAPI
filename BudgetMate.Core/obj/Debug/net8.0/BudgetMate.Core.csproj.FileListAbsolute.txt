@@ -12,3 +12,4 @@
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Core/obj/Debug/net8.0/BudgetMate.Core.pdb
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Core/obj/Debug/net8.0/BudgetMate.Core.genruntimeconfig.cache
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Core/obj/Debug/net8.0/ref/BudgetMate.Core.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Core/obj/Debug/net8.0/BudgetMate.Core.sourcelink.json

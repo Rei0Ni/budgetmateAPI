@@ -64,6 +64,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.Name = "SessionCookie";
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
 
 // AddIdentity :-  Registers the services  

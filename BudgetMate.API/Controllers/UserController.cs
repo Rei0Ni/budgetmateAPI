@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace BudgetMate.API.Controllers
 {
@@ -48,6 +49,7 @@ namespace BudgetMate.API.Controllers
             {
                 await userManager.AddToRoleAsync(appUser, "App_User");
                 _walletRepository.AddWallet(appUser.Id.ToString());
+                Log.Information(appUser!.UserName!);
                 return Ok(new { Result = "User created successfully" });
             }
             return BadRequest(result.Errors);
@@ -65,7 +67,7 @@ namespace BudgetMate.API.Controllers
             if (appUser != null && await userManager.CheckPasswordAsync(appUser, user.Password!))
             {
                 var result = await signInManager.PasswordSignInAsync(appUser.UserName!,
-                           user.Password!, false, false);
+                           user.Password!, true, false);
 
                 return Ok(new { Result = "Login Successful" });
             }

@@ -17,3 +17,4 @@
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Infrastructure/obj/Debug/net8.0/BudgetMate.Infrastructure.pdb
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Infrastructure/obj/Debug/net8.0/BudgetMate.Infrastructure.genruntimeconfig.cache
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Infrastructure/obj/Debug/net8.0/ref/BudgetMate.Infrastructure.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.Infrastructure/obj/Debug/net8.0/BudgetMate.Infrastructure.sourcelink.json

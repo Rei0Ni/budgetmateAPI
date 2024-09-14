@@ -72,3 +72,4 @@
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.API/obj/Debug/net8.0/BudgetMate.API.pdb
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.API/obj/Debug/net8.0/BudgetMate.API.genruntimeconfig.cache
 /home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.API/obj/Debug/net8.0/ref/BudgetMate.API.dll
+/home/rei0ni/Documents/VS Code/C#/BudgetMate/BudgetMate.API/obj/Debug/net8.0/BudgetMate.API.sourcelink.json
