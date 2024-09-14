@@ -1,16 +1,22 @@
+using System.Text.Json.Serialization;
 using AutoMapper;
 using BudgetMate.API.Models;
 using BudgetMate.Application.Configuration;
+using BudgetMate.Application.Interfaces.Dashboard;
 using BudgetMate.Application.Interfaces.Transaction;
 using BudgetMate.Application.Interfaces.Wallet;
 using BudgetMate.Application.Services;
 using BudgetMate.Core.Contexts;
 using BudgetMate.Core.Entities;
 using BudgetMate.Infrastructure;
+using BudgetMate.Infrastructure.Dashboard;
 using BudgetMate.Infrastructure.Wallet;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
 using Serilog;
 using Serilog.Events;
 
@@ -110,6 +116,11 @@ builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddScoped<IWalletRepository, WalletRepository>();
+builder.Services.AddScoped<IDashTransactionRepository, DashTransactionRepository>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
+
+BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
+
 
 var app = builder.Build();
 

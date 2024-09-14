@@ -34,7 +34,7 @@ public class TransactionRepository : ITransactionRepository
     public List<TransactionDto> GetAllUserTransaction(string userId)
     {
         var User = _context.Users.Find(x => x.Id == new Guid(userId)).FirstOrDefault();
-        var transactions = _context.Transactions.Find(x => x.UserId == User.Id).ToList();
+        var transactions = _context.Transactions.Find(x => x.UserId == User.Id).SortByDescending(x => x.Date).ToList();
         return _mapper.Map<List<TransactionDto>>(transactions);
     }
 
