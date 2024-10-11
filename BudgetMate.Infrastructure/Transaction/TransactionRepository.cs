@@ -5,6 +5,7 @@ using BudgetMate.Application.DTO.Transaction;
 using BudgetMate.Application.Interfaces.Transaction;
 using BudgetMate.Core.Contexts;
 using BudgetMate.Core.Entities;
+using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
 
 namespace BudgetMate.Infrastructure;
@@ -13,16 +14,21 @@ public class TransactionRepository : ITransactionRepository
 {
     private readonly ApplicationDBContext _context;
     private readonly IMapper _mapper;
+    private readonly IHostEnvironment _env;
 
-    public TransactionRepository(ApplicationDBContext context, IMapper mapper)
+    public TransactionRepository(
+        ApplicationDBContext context,
+        IMapper mapper,
+        IHostEnvironment environment)
     {
+        _env = environment;
         _context = context;
         _mapper = mapper;
     }
-    public TransactionDto AddTransaction(Transaction transaction)
+    public Transaction AddTransaction(Transaction transaction)
     {
         _context.Transactions.InsertOne(transaction);
-        return _mapper.Map<TransactionDto>(transaction);
+        return transaction;
     }
 
     public TransactionDto? DeleteTransaction(string transactionId)
@@ -45,5 +51,28 @@ public class TransactionRepository : ITransactionRepository
             .Find(x => x.UserId == new Guid(userId) && x.Id == new Guid(transactionId))
             .FirstOrDefault();
         return _mapper.Map<TransactionDto>(transaction);
+    }
+
+    public TransactionDto GetTransactionByInvoiceId(string InvoiceId)
+    {
+        var transaction = _context.Transactions
+            .Find(x => x.Invoice == $"api/Invoice/{InvoiceId}")
+            .FirstOrDefault();
+        return _mapper.Map<TransactionDto>(transaction);
+    }
+
+    public async Task<Transaction> UpdateTransactionInvoiceAsync(string TransactionId, string InvoicePath)
+    {
+        // var transaction = _context.Transactions.Find(x => x.Id == new Guid(TransactionId)).FirstOrDefault();
+        var filter = Builders<Transaction>.Filter.Eq(transaction => transaction.Id, new Guid(TransactionId));
+        var update = Builders<Transaction>.Update
+                    .Set(transaction => transaction.Invoice, InvoicePath);
+        await _context.Transactions.UpdateOneAsync(filter, update);
+        return _context.Transactions.Find(x => x.Id == new Guid(TransactionId)).FirstOrDefault();
+    }
+
+    public async Task<bool> UserHasAccessToTransactionAsync(string UserId, string transactionId)
+    {
+        return (await _context.Transactions.FindAsync(x => x.UserId == new Guid(UserId) && x.Id == new Guid(transactionId))).Any();
     }
 }

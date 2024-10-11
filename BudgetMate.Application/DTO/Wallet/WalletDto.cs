@@ -1,4 +1,5 @@
 using System;
+using BudgetMate.Application.DTO.Transaction;
 
 namespace BudgetMate.Application.DTO.Wallet;
 

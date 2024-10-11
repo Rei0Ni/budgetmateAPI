@@ -3,13 +3,18 @@ using AutoMapper;
 using BudgetMate.API.Models;
 using BudgetMate.Application.Configuration;
 using BudgetMate.Application.Interfaces.Dashboard;
+using BudgetMate.Application.Interfaces.Invoice;
+using BudgetMate.Application.Interfaces.Stats;
 using BudgetMate.Application.Interfaces.Transaction;
+using BudgetMate.Application.Interfaces.User;
 using BudgetMate.Application.Interfaces.Wallet;
 using BudgetMate.Application.Services;
 using BudgetMate.Core.Contexts;
 using BudgetMate.Core.Entities;
 using BudgetMate.Infrastructure;
 using BudgetMate.Infrastructure.Dashboard;
+using BudgetMate.Infrastructure.Invoice;
+using BudgetMate.Infrastructure.Stats;
 using BudgetMate.Infrastructure.Wallet;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -114,10 +119,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddScoped<IWalletRepository, WalletRepository>();
+builder.Services.AddScoped<IStatsRepository, StatsRepository>();
+builder.Services.AddScoped<IStatsService, StatsService>();
 builder.Services.AddScoped<IDashTransactionRepository, DashTransactionRepository>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
 
@@ -137,6 +147,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+// app.UseStaticFiles();
 
 using (var scope = app.Services.CreateScope())
 {

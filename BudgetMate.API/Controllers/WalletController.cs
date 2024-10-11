@@ -20,8 +20,7 @@ namespace BudgetMate.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetWallet")]
-        public ActionResult<WalletDto> Get()
+        public ActionResult<dynamic> Get()
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             return _walletService.GetWallet(userId);

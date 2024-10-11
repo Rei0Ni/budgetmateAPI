@@ -22,6 +22,9 @@ public class ApplicationDBContext
         public IMongoCollection<Transaction> Transactions =>
                 _database.GetCollection<Transaction>("Transactions");
 
+        public IMongoCollection<Invoice> Invoices =>
+                _database.GetCollection<Invoice>("Invoices");
+
         public IMongoCollection<Wallet> Wallets =>
                 _database.GetCollection<Wallet>("Wallets");
 }

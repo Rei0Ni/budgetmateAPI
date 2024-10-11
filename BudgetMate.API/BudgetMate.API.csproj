@@ -21,4 +21,8 @@
     <ProjectReference Include="..\BudgetMate.Infrastructure\BudgetMate.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Invoices/" />
+  </ItemGroup>
+
 </Project>

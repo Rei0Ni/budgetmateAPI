@@ -37,6 +37,19 @@ public class WalletRepository : IWalletRepository
         return wallet;
     }
 
+    public List<Transaction> GetTodayTransactions(string UserId){
+        var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();
+
+        var startDate = DateTime.UtcNow.AddDays(-1);
+        var endDate = DateTime.UtcNow;
+
+        var Transactions = _context.Transactions
+            .Find(t => t.UserId == new Guid(UserId) && t.Date >= startDate && t.Date < endDate)
+            .ToList();
+
+        return Transactions;
+    }
+
     public void ModifyWallet(string UserId, TransactionDto? transaction)
     {
         var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();

@@ -8,8 +8,9 @@ public class Transaction
     public TransactionType Type { get; set; }
     public decimal Amount { get; set; }
     public TransactionCategory Category { get; set; }
-    public string Description { get; set; } = "";
-    public DateTime Date { get; set; }
+    public string? Description { get; set; } = "";
+    public DateTime Date { get; set; } = DateTime.Now;
+    public string? Invoice { get; set; }
 
     public Guid UserId { get; set; }
     public required ApplicationUser User { get; set; }

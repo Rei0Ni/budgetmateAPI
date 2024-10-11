@@ -8,4 +8,5 @@ public interface IWalletRepository
     void RemoveWallet(string UserId);
     void ModifyWallet(string UserId, TransactionDto? transaction);
     Core.Entities.Wallet GetWallet(string UserId);
+    List<Core.Entities.Transaction> GetTodayTransactions(string UserId);
 }

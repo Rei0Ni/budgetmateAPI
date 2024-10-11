@@ -13,9 +13,11 @@ namespace BudgetMate.API.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
+        private readonly IWebHostEnvironment _env;
 
-        public TransactionController(ITransactionService transactionService)
+        public TransactionController(ITransactionService transactionService, IWebHostEnvironment environment)
         {
+            _env = environment;
             _transactionService = transactionService;
         }
 
@@ -29,8 +31,8 @@ namespace BudgetMate.API.Controllers
         }
 
         [HttpGet]
-        [Route("Get/All")]
-        public ActionResult<List<TransactionDto>> GetAll()
+        [Route("GetAll")]
+        public ActionResult<AllTransactionsDto> GetAll()
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var transactions = _transactionService.GetAllUserTransaction(userId);
@@ -39,7 +41,7 @@ namespace BudgetMate.API.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<ActionResult<TransactionDto>> AddNew(NewTransactionDto dto)
+        public async Task<ActionResult<TransactionDto>> AddNew([FromForm] NewTransactionDto dto)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var transactions = await _transactionService.AddTransactionAsync(dto, userId);
@@ -48,7 +50,7 @@ namespace BudgetMate.API.Controllers
 
         [HttpPost]
         [Route("Delete/{ID}")]
-        public ActionResult<List<TransactionDto>> Delete(string ID)
+        public ActionResult<TransactionDto> Delete(string ID)
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var transactions = _transactionService.DeleteTransaction(ID, userId);

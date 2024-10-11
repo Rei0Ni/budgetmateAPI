@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using BudgetMate.Application.DTO.User;
+using BudgetMate.Application.Interfaces.User;
 using BudgetMate.Application.Interfaces.Wallet;
 using BudgetMate.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -18,17 +20,20 @@ namespace BudgetMate.API.Controllers
 
         private readonly IConfiguration _configuration;
         private readonly IWalletRepository _walletRepository;
+        private readonly IUserService _userService;
 
         public UserController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IConfiguration configuration,
-            IWalletRepository walletRepository)
+            IWalletRepository walletRepository,
+            IUserService userService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _configuration = configuration;
             _walletRepository = walletRepository;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -73,6 +78,16 @@ namespace BudgetMate.API.Controllers
             }
 
             return Unauthorized(new { Result = "Invalid Username or Password" });
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("Profile")]
+        public async Task<ActionResult> GetProfile()
+        {
+            var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+            var userProfile = await _userService.GetUserProfileAsync(userId);
+            return Ok(userProfile);
         }
 
         [HttpGet]
