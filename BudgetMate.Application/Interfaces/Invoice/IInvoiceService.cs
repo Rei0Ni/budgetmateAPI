@@ -9,4 +9,5 @@ public interface IInvoiceService
 {
     Task<Byte[]?> GetInvoiceAsync(string UserId, string TransactionId);
     string? AddInvoice(IFormFile Invoice, Core.Entities.Transaction transaction);
+    void DeleteInvoice(String transactionId);
 }

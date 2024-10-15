@@ -27,7 +27,7 @@ namespace BudgetMate.API.Controllers
             if (Invoice == null){
                 return NoContent();
             }
-            return File(Invoice, "image/jpg");
+            return File(Invoice, "image/jpeg");
         }
     }
 }

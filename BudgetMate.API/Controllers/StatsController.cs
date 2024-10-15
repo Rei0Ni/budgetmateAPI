@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using BudgetMate.Application.DTO.Stats;
 using BudgetMate.Application.Interfaces.Stats;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace BudgetMate.API.Controllers
             _service = service;
         }
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<StatsDto>> GetStatsAsync()
         {
             var userId = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;

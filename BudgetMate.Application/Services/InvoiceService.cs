@@ -36,16 +36,14 @@ public class InvoiceService : IInvoiceService
     {
         if (SaveInvoice(Invoice, transaction.Id.ToString()))
         {
-            // var newInvoice = new Invoice()
-            // {
-            //     Path = $"api/Invoice/{transaction.Id.ToString()}",
-            //     Transaction = transaction,
-            //     TransactionId = transaction.Id
-            // };
-            // return _mapper.Map<InvoiceDto>(_repository.AddInvoice(newInvoice));
             return $"api/Invoice/{transaction.Id}";
         }
         return null;
+    }
+
+    public void DeleteInvoice(string transactionId)
+    {
+        RemoveInvoice(transactionId);
     }
 
     public async Task<Byte[]?> GetInvoiceAsync(string UserId, string InvoiceId)
@@ -93,5 +91,25 @@ public class InvoiceService : IInvoiceService
             return false;
         }
 
+    }
+
+    private bool RemoveInvoice(String transactionId)
+    {
+        try
+        {
+            var files = Directory.EnumerateFiles(InvoicesPath, transactionId + ".*");
+            var filePath = files.FirstOrDefault();
+
+            if (filePath != null && File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            Log.Error($"an error happened while Deleting invoice for transaction with id of \"{transactionId}\"\n{ex}");
+            return false;
+        }
     }
 }

@@ -84,4 +84,25 @@ public class WalletRepository : IWalletRepository
         }
         _context.Wallets.DeleteOne(x => x.UserId == User!.Id);
     }
+
+    public void RemoveTransactionFromWallet(string UserId, decimal amount, TransactionType type)
+    {
+        var User = _context.Users.Find(x => x.Id == new Guid(UserId)).FirstOrDefault();
+        var wallet = _context.Wallets.Find(x => x.UserId == User!.Id).FirstOrDefault();
+        var filter = Builders<Core.Entities.Wallet>.Filter.Eq(wallet => wallet.UserId, User!.Id);
+        if (type == TransactionType.INCOME)
+        {
+            var update = Builders<Core.Entities.Wallet>.Update
+                    .Set(wallet => wallet.Balance, wallet.Balance - amount)
+                    .Set(wallet => wallet.Income, wallet.Income - amount);
+            _context.Wallets.UpdateOneAsync(filter, update);
+        }
+        else if (type == TransactionType.EXPENSE)
+        {
+            var update = Builders<Core.Entities.Wallet>.Update
+                    .Set(wallet => wallet.Balance, wallet.Balance + amount)
+                    .Set(wallet => wallet.Expense, wallet.Expense - amount);
+            _context.Wallets.UpdateOneAsync(filter, update);
+        }
+    }
 }

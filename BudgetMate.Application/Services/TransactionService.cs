@@ -77,6 +77,8 @@ public class TransactionService : ITransactionService
         var transaction = _repository.GetTransaction(transactionId, UserId);
         if (transaction != null)
         {
+            _invoiceService.DeleteInvoice(transactionId);
+            _walletRepository.RemoveTransactionFromWallet(UserId, transaction.Amount, transaction.Type);
             return _repository.DeleteTransaction(transactionId);
         }
         return null;

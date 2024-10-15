@@ -70,7 +70,18 @@ public class StatsRepository : IStatsRepository
             .GroupBy(t => t.Category)
             .Select(c => new CategorySpendingDto
             {
-                Category = c.Key.ToString(),
+                Category = c.Key,
+                TotalSpent = c.Sum(t => t.Amount)
+            })
+            .ToList();
+
+        var categoryWiseIncome = _context.Transactions
+            .Find(t => t.UserId == new Guid(UserId) && t.Type == TransactionType.INCOME && t.Date >= startDate && t.Date < endDate)
+            .ToList()
+            .GroupBy(t => t.Category)
+            .Select(c => new CategorySpendingDto
+            {
+                Category = c.Key,
                 TotalSpent = c.Sum(t => t.Amount)
             })
             .ToList();
@@ -79,7 +90,8 @@ public class StatsRepository : IStatsRepository
         {
             TotalIncome = totalIncome,
             TotalExpenses = totalExpense,
-            CategoryWiseSpending = categoryWiseSpending
+            CategoryWiseSpending = categoryWiseSpending,
+            CategoryWiseIncome = categoryWiseIncome
         };
     }
 }
